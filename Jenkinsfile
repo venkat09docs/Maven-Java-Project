@@ -76,7 +76,7 @@ pipeline {
 				}
 			}
 		}
-		stage ('deploy') {
+		stage ('Prod-Deploy') {
 			agent {
 				label "master"
             }
