@@ -45,7 +45,8 @@ pipeline {
 		    //SSH-Steps-Plugin should be installed
 		    //SCP-Publisher Plugin (Optional)
 		    steps {
-		        //sshScript remote: remote, script: "abc.sh"  	sshPut remote: remote, from: 'target/java-maven-1.0.war', into: '/root/tomcat8/webapps'		        
+		        //sshScript remote: remote, script: "abc.sh"  	
+			sshPut remote: remote, from: 'target/java-maven-1.0.war', into: '/root/tomcat8/webapps'		        
 		    }
     	}
     	stage ('Integration-Test') {
