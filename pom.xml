@@ -121,4 +121,16 @@
     </plugins>
   </reporting>
 
+  <distributionManagement>
+    <snapshotRepository>
+      <id>deployment</id>
+      <name>my snapshot repository</name>
+      <url>http://192.168.10.1:8080/nexus/content/repositories/snapshots/</url>
+    </snapshotRepository>
+    <repository>
+      <id>deployment</id>
+      <name>my repository</name>
+      <url>http://192.168.10.1:8080/nexus/content/repositories/releases/</url>
+    </repository>
+  </distributionManagement>
 </project>
