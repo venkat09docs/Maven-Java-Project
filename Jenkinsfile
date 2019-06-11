@@ -1,7 +1,7 @@
 def mvnHome
 def remote = [:]
     	remote.name = 'deploy'
-    	remote.host = '192.168.10.3'
+    	remote.host = '192.168.33.12'
     	remote.user = 'root'
     	remote.password = 'vagrant'
     	remote.allowAnyHosts = true
@@ -13,7 +13,7 @@ pipeline {
 		//def mvnHome
 		stage ('Preparation') {
 		    agent {
-		        label 'slave'
+		        label 'Slave'
 		    }
 		    steps {
 			    git 'https://github.com/venkat09docs/Maven-Java-Project.git'
@@ -25,7 +25,7 @@ pipeline {
 		}
 		stage ('Static Analysis'){
 			agent {
-				label "slave"
+				label "Slave"
             }
 			steps {
 				sh "'${mvnHome}/bin/mvn' clean cobertura:cobertura"			
@@ -38,7 +38,7 @@ pipeline {
 		}
 		stage ('build'){
 			agent {
-				label "slave"
+				label "Slave"
             }
 			steps {
 				sh "'${mvnHome}/bin/mvn' clean package"			
@@ -53,7 +53,7 @@ pipeline {
 		}
 		stage('Deploy-to-Stage') {
 		     agent {
-		        label 'slave'
+		        label 'Slave'
 		    }
 		    //SSH-Steps-Plugin should be installed
 		    //SCP-Publisher Plugin (Optional)
@@ -64,7 +64,7 @@ pipeline {
     	}
     	stage ('Integration-Test') {
 			agent {
-				label "slave"
+				label "Slave"
             }
 			steps {
 				parallel (
@@ -81,7 +81,7 @@ pipeline {
 		}
 		stage ('approve') {
 			agent {
-				label "slave"
+				label "Slave"
             }
 			steps {
 				timeout(time: 7, unit: 'DAYS') {
@@ -91,7 +91,7 @@ pipeline {
 		}
 		stage ('Prod-Deploy') {
 			agent {
-				label "slave"
+				label "Slave"
             }
 			steps {
 				unstash 'Source'
