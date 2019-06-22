@@ -125,12 +125,12 @@
     <snapshotRepository>
       <id>deployment</id>
       <name>my snapshot repository</name>
-      <url>http://192.168.33.10:8080/nexus/content/repositories/snapshots/</url>
+      <url>http://192.168.33.10:8090/nexus/content/repositories/snapshots/</url>
     </snapshotRepository>
     <repository>
       <id>deployment</id>
       <name>my repository</name>
-      <url>http://192.168.33.10:8080/nexus/content/repositories/releases/</url>
+      <url>http://192.168.33.10:8090/nexus/content/repositories/releases/</url>
     </repository>
   </distributionManagement>
 </project>
