@@ -19,8 +19,10 @@ public class JenkinsDemo
     @Before
     public void setUp()
     {
+        ChromeOptions chromeOptions= new ChromeOptions();
+        chromeOptions.setBinary("/bin/chromedriver");
         System.setProperty("webdriver.chrome.driver","/bin/chromedriver");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(chromeOptions);
         driver.get(Base_Url);
     }
 
