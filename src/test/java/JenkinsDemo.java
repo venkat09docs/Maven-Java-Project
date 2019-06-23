@@ -25,6 +25,7 @@ public class JenkinsDemo
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--disable-dev-shm-usage");
+        chromeOptions.setExperimentalOption("useAutomationExtension", false);
         System.setProperty("webdriver.chrome.driver","/bin/chromedriver");
         driver = new ChromeDriver(chromeOptions);
         driver.get(Base_Url);
