@@ -14,7 +14,7 @@ RUN tar xzvf apache-tomcat-8.5.42.tar.gz -C /opt/
 RUN cp -R /opt/apache-tomcat-8.5.42/ /opt/tomcat
 
 WORKDIR /opt/tomcat/webapps
-COPY target/webapp.war .
+COPY target/*.war /opt/tomcat/webapps/webapp.war
 
 EXPOSE 8080
 
