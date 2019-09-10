@@ -13,7 +13,7 @@ pipeline {
 		//def mvnHome
 		stage ('Preparation') {
 		    agent {
-		        label 'Slave'
+		        label 'slave'
 		    }
 		    steps {
 			    git 'https://github.com/venkat09docs/Maven-Java-Project.git'
@@ -38,7 +38,7 @@ pipeline {
 		}
 		stage ('build'){
 			agent {
-				label "Slave"
+				label "slave"
             }
 			steps {
 				sh "'${mvnHome}/bin/mvn' clean package"			
@@ -53,7 +53,7 @@ pipeline {
 		}
 		stage('Deploy-to-Stage') {
 		     agent {
-		        label 'Slave'
+		        label 'slave'
 		    }
 		    //SSH-Steps-Plugin should be installed
 		    //SCP-Publisher Plugin (Optional)
@@ -64,7 +64,7 @@ pipeline {
     	}
     	stage ('Integration-Test') {
 			agent {
-				label "Slave"
+				label "slave"
             }
 			steps {
 				parallel (
@@ -81,7 +81,7 @@ pipeline {
 		}
 		stage ('approve') {
 			agent {
-				label "Slave"
+				label "slave"
             }
 			steps {
 				timeout(time: 7, unit: 'DAYS') {
@@ -91,7 +91,7 @@ pipeline {
 		}
 		stage ('Prod-Deploy') {
 			agent {
-				label "Slave"
+				label "slave"
             }
 			steps {
 				unstash 'Source'
