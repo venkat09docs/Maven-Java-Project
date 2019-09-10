@@ -25,7 +25,7 @@ pipeline {
 		}
 		stage ('Static Analysis'){
 			agent {
-				label "Slave"
+				label "slave"
             }
 			steps {
 				sh "'${mvnHome}/bin/mvn' clean cobertura:cobertura"			
