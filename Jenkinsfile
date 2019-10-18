@@ -59,7 +59,7 @@ pipeline {
 		    //SCP-Publisher Plugin (Optional)
 		    steps {
 		        //sshScript remote: remote, script: "abc.sh"  	
-			sshPut remote: remote, from: 'target/java-maven-1.0-SNAPSHOT.war', into: '/root/workspace/stagingServer/webapps'		        
+			sshPut remote: remote, from: 'target/java-maven-1.0-SNAPSHOT.war', into: '/root/stagingServer/webapps'		        
 		    }
     	}
     	stage ('Integration-Test') {
