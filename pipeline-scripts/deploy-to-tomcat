@@ -58,7 +58,7 @@ pipeline {
               label 'Java'
           }
           steps{
-             mail bcc: '', body: '''Hi,
+             //mail bcc: '', body: '''Hi,
              Welcome to jenkins email alerts.
             Thanks''', 
             cc: '', from: 'devopstestmail@gmail.com', 
