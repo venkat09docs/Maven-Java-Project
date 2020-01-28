@@ -1,0 +1,43 @@
+pipeline {
+   agent any
+
+   tools {
+      // Install the Maven version configured and add it to the path.
+      maven "maven3"
+   }
+
+   stages {
+      stage('Check Out Code') {
+         steps {
+            // Get src code from a GitHub repository
+            git credentialsId: 'git_user', url: 'https://github.com/venkat09docs/Maven-Java-Project.git'
+                   
+         }         
+      }
+      stage('Build'){
+        steps{
+            // Run Maven on a Unix agent.
+            sh "mvn clean package" 
+        }
+         post {
+            // record the test results and archive the war file.
+            success {
+               junit '**/target/surefire-reports/*.xml'
+               archiveArtifacts 'target/*.war'
+         }
+         
+        }
+      }
+
+      stage('Email Notification'){
+         mail bcc: '', body: '''Hi,
+         Welcome to jenkins email alerts.
+         Thanks''', 
+         cc: '', from: 'devopstestmail@gmail.com', 
+         replyTo: '', 
+         subject: 'Jenkins Job', 
+         to: 'devopstestmail@gmail.com'
+      }
+
+   }
+}

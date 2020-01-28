@@ -1,0 +1,15 @@
+def hello = "Welcome to RNS"
+pipeline {
+   agent none
+   
+   stages {
+      stage('Hello') {
+          agent{
+              label 'Java'
+          }
+         steps {
+            echo "Hello, ${hello} "
+         }
+      }
+   }
+}

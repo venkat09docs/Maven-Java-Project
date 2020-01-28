@@ -1,0 +1,13 @@
+def hello = "Welcome to RNS"
+pipeline {
+   agent any
+   
+   stages {
+      stage('Hello') {
+          
+         steps {
+            echo "Hello, ${hello} "
+         }
+      }
+   }
+}
