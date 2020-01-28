@@ -56,18 +56,18 @@ pipeline {
       //stage('Email Notification'){
       //  agent {
       //    label 'Java'
-          //}
-          steps{
-             //mail bcc: '', body: '''Hi,
-             Welcome to jenkins email alerts.
-            Thanks''', 
-            cc: '', from: 'devopstestmail@gmail.com', 
-            replyTo: '', 
-            subject: 'Jenkins Job', 
-            to: 'devopstestmail@gmail.com'
-          }
+      //}
+      //    steps{
+      //       //mail bcc: '', body: '''Hi,
+      //       Welcome to jenkins email alerts.
+      //      Thanks''', 
+      //      cc: '', from: 'devopstestmail@gmail.com', 
+      //      replyTo: '', 
+      //      subject: 'Jenkins Job', 
+      //      to: 'devopstestmail@gmail.com'
+      //    }
         
-      }
+      //}
 
    }
 }
