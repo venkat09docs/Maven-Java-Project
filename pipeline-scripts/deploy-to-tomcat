@@ -1,31 +1,25 @@
 def mvnHome
-def tomcatIp = '172.31.0.65'
-def tomcatUser = 'centos'
-def stopTomcat = "ssh -o StrictHostKeyChecking=no ${tomcatUser}@${tomcatIp} /home/centos/tomcat8/bin/shutdown.sh"
-def startTomcat = "ssh -o StrictHostKeyChecking=no ${tomcatUser}@${tomcatIp} /home/centos/tomcat8/bin/startup.sh"
-def copyWar = "scp -o StrictHostKeyChecking=no target/webapp.war ${tomcatUser}@${tomcatIp}:/home/centos/tomcat8/webapps/"
+
 pipeline {
    agent none
 
    stages {
       stage('Check Out Code') {
           agent {
-              label 'Java'
+              label 'BuildServer'
           }
          steps {
             // Get src code from a GitHub repository
             git credentialsId: 'github_un-pwd', url: 'https://github.com/venkat09docs/Maven-Java-Project.git'
-
             
-            stash 'Source' 
             script{
-                mvnHome = tool 'maven3'
+                mvnHome = tool name: 'maven3.6', type: 'maven'
             }      
          }         
       }
       stage('Build'){
           agent {
-              label 'Java'
+              label 'BuildServer'
           }
         steps{
             // Run Maven on a Unix agent.
@@ -40,36 +34,7 @@ pipeline {
          
         }
       }
-      stage('Deploy to Tomcat') {
-          agent {
-              label 'Java'
-          }
-          steps {
-              sh 'mv target/*.war target/webapp.war' 
-	   
-                sshagent(['build_server']) {
-			        sh "${stopTomcat}"
-			        sh "${copyWar}"
-			        sh "${startTomcat}"
-	            }
-          }
-      }
-
-      //stage('Email Notification'){
-      //  agent {
-      //    label 'Java'
-      //}
-      //    steps{
-      //       //mail bcc: '', body: '''Hi,
-      //       Welcome to jenkins email alerts.
-      //      Thanks''', 
-      //      cc: '', from: 'devopstestmail@gmail.com', 
-      //      replyTo: '', 
-      //      subject: 'Jenkins Job', 
-      //      to: 'devopstestmail@gmail.com'
-      //    }
-        
-      //}
+      
 
    }
 }
