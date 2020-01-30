@@ -1,0 +1,23 @@
+--- # Upload the Shell Script to Remote Host and Run it.
+-  hosts: sonar
+   remote_user: centos
+   become: yes
+   become_method: sudo
+   connection: ssh
+   gather_facts: yes    
+   tasks: 
+   -  name: Upload a service file to the remote host if does not exist
+      copy:
+               src: sonar.service
+               dest: /etc/systemd/system/sonarqube.service
+               mode: 0755
+   -  name: Upload a service file to the remote host if does not exist
+      copy:
+               src: install.sh
+               dest: /home/centos/install.sh
+               mode: 0755
+   
+   -  name: Run the program
+      shell: /home/centos/install.sh
+      register: result
+   #-  debug: msg="stdout={{ result }}"
