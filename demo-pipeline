@@ -1,0 +1,23 @@
+def str = "Pipeline"
+pipeline {
+   agent none
+    
+   stages {
+      stage('Hello') {
+         agent{
+             label 'BuildServer'
+         }
+         steps {
+            echo 'How are you?'
+         }
+      }
+      stage('Welcome') {
+         agent{
+             label 'BuildServer'
+         }
+         steps {
+            echo "Welcome to ${str} Script"
+         }
+      }
+   }
+}
