@@ -1,5 +1,10 @@
 def mvnHome
-
+def remote = [:]
+    	remote.name = 'webserver'
+    	remote.host = '172.31.8.43'
+    	remote.user = 'centos'
+    	remote.password = 'Rnstech@123'
+    	remote.allowAnyHosts = true
 pipeline {
    agent none
 
