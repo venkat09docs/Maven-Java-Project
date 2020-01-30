@@ -39,6 +39,16 @@ pipeline {
          
         }
       }
+
+      stage('Deploy to Staging'){
+          agent {
+              label 'BuildServer'
+          }
+          steps{
+            // Run Maven on a Unix agent.
+            sh "'${mvnHome}/bin/mvn' clean package" 
+        }
+      }
       
 
    }
