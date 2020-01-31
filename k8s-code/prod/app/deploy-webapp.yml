@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+  namespace: prod
+  labels:
+    app: webapp
+spec:
+  containers:
+    - name: webapp
+      image: gvenkat/rnswebapp1:latest
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 8080
