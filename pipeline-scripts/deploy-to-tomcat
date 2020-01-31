@@ -41,7 +41,6 @@ pipeline {
       }
       
 
-   }
    
    stage('Deploy to Staging'){
       agent {
@@ -54,5 +53,6 @@ pipeline {
          sshPut remote: remote, from: 'target/webapp.war', into: '/home/centos/tomcat8/webapps/'
          sshCommand remote: remote, command: 'sh /home/centos/tomcat8/bin/startup.sh'
       }
+   }
    }
 }
