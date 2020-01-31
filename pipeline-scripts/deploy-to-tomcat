@@ -1,5 +1,10 @@
 def mvnHome
-
+def remote = [:]
+remote.name = "Staging"
+remote.host = "172.31.7.87"
+remote.allowAnyHosts = true
+remote.user = centos
+remote.password = Rnstech@123
 pipeline {
    agent none
 
@@ -36,5 +41,18 @@ pipeline {
       }
       
 
+   }
+   
+   stage('Deploy to Staging'){
+      agent {
+              label 'BuildServer'
+          }
+          
+      steps{
+         sh "mv target/*.war target/webapp.war"
+         sshCommand remote: remote, command: 'sh /home/centos/tomcat8/bin/shutdown.sh'
+         sshPut remote: remote, from: 'target/webapp.war', into: '/home/centos/tomcat8/webapps/'
+         sshCommand remote: remote, command: 'sh /home/centos/tomcat8/bin/startup.sh'
+      }
    }
 }
