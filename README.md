@@ -1,4 +1,4 @@
-ava-maven-junit-helloworld
+Java-Maven-Junit-HelloWorld
 ===========================
 
 A „Hello World!” sample written in Java using Maven for the build, that showcases a few very simple tests.
