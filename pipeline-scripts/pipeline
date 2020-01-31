@@ -1,8 +1,9 @@
+def mvnHome
 pipeline {
    agent none
     
    stages {
-      stage('Hello') {
+      stage('Prepare Workspace') {
          agent {
               label 'BuildServer'
           }
