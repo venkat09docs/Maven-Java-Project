@@ -16,6 +16,8 @@
     - K8s Cluster Create it and update it.
 
 
+Required Tools and Settings:
+----------------------------
 
 - Git Hub Integration
   - Integrate the Jenkins with GitHub (Maven-Java-Project) Project
