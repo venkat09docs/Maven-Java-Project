@@ -1,0 +1,18 @@
+pipeline {
+   agent none
+    
+   stages {
+      stage('Hello') {
+         agent {
+              label 'BuildServer'
+          }
+         steps {
+            // Get src code from a GitHub repository
+            git credentialsId: 'github_un-pwd', url: 'https://github.com/venkat09docs/Maven-Java-Project.git'
+            
+            script{
+                mvnHome = tool name: 'maven3.6', type: 'maven'
+            }      
+      }     
+   }
+}
