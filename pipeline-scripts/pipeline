@@ -13,6 +13,7 @@ pipeline {
             script{
                 mvnHome = tool name: 'maven3.6', type: 'maven'
             }      
-      }     
+      }   
+      }
    }
 }
