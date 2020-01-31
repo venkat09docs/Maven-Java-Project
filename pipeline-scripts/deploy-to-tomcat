@@ -3,8 +3,8 @@ def remote = [:]
 remote.name = "Staging"
 remote.host = "172.31.7.87"
 remote.allowAnyHosts = true
-remote.user = centos
-remote.password = Rnstech@123
+remote.user = "centos"
+remote.password = "Rnstech@123"
 pipeline {
    agent none
 
