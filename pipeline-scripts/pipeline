@@ -146,6 +146,16 @@ pipeline {
 			}
 		}
 
-    
+    stage ('Prod-Deploy') {
+			agent {
+				label "BuildServer"
+            }
+			steps{
+				//Deploy to Prod K8s Cluster
+				sshCommand remote: remote1, command: "cd Maven-Java-Project; git pull"
+				sshCommand remote: remote1, command: "kubectl delete -f Maven-Java-Project/k8s-code/prod/app/deploy-webapp.yml"
+				sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/prod/app/."
+			}
+		}
    }
 }
