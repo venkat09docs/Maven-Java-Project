@@ -115,9 +115,9 @@ pipeline {
 		    }
 			steps{
 		    	//Deploy to K8s Cluster 
-				sshCommand remote: remote1, command: "cd jenkins-project; git pull"
-				sshCommand remote: remote1, command: "kubectl delete -f jenkins-project/k8s-code/staging/app/deploy-webapp.yml"
-				sshCommand remote: remote1, command: "kubectl apply -f jenkins-project/k8s-code/staging/app/."
+				sshCommand remote: remote1, command: "cd Maven-Java-Project; git pull"
+				sshCommand remote: remote1, command: "kubectl delete -f Maven-Java-Project/k8s-code/staging/app/deploy-webapp.yml"
+				sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/staging/app/."
 
 			}		    
     	}
