@@ -88,5 +88,18 @@ pipeline {
                   sh "docker build -t gvenkat/batch21webapp ."  
          }
      }
+     
+     stage('Publish Docker Image') {
+         agent {
+                  label 'BuildServer'
+         }
+    steps{
+
+    	withCredentials([usernameColonPassword(credentialsId: 'docker-hub', variable: 'dockerPassword')]) {
+    		sh "docker login -u gvenkat -p ${dockerPassword}"
+	}
+        	sh "docker push gvenkat/batch21webapp"
+    }
+    }
    }
 }
