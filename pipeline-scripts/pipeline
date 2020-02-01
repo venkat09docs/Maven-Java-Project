@@ -31,9 +31,14 @@ pipeline {
           steps{
           
             sshCommand remote: remote, command: 'cd Maven-Java-Project; git pull'
-            sshCommand remote: remote, command: 'cd Maven-Java-Project; ansible-playbook -i hosts tools/sonarqube/sonar-install.yaml'
-            sshCommand remote: remote, command: 'cd Maven-Java-Project; ansible-playbook -i hosts tools/docker/docker-install.yml'
+            //sshCommand remote: remote, command: 'cd Maven-Java-Project; ansible-playbook -i hosts tools/sonarqube/sonar-install.yaml'
+            //sshCommand remote: remote, command: 'cd Maven-Java-Project; ansible-playbook -i hosts tools/docker/docker-install.yml'
           }
+      }      
+      stage('SonarQube analysis') {
+         withSonarQubeEnv('sonar-7') { // You can override the credential to be used
+                  sh 'mvn sonar:sonar'
+         }
       }
    }
 }
