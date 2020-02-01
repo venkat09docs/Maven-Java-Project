@@ -139,10 +139,13 @@ pipeline {
 				label "BuildServer"
             }
 			steps {
-				//timeout(time: 7, unit: 'DAYS') {
-					input message: 'Do you want to deploy?', submitter: 'admin'
-				}
+				echo "Approval State"
+                //timeout(time: 7, unit: 'DAYS') {                    
+				//	input message: 'Do you want to deploy?', submitter: 'admin'
+				//}
 			}
 		}
+
+    
    }
 }
