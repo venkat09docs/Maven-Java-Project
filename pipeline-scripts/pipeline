@@ -108,5 +108,18 @@ pipeline {
         	sh "docker push gvenkat/batch21webapp"
     }
     }
+
+    stage('Deploy to Staging') {
+		     agent {
+		        label 'BuildServer'
+		    }
+			steps{
+		    	//Deploy to K8s Cluster 
+				sshCommand remote: remote1, command: "cd jenkins-project; git pull"
+				sshCommand remote: remote1, command: "kubectl delete -f jenkins-project/k8s-code/staging/app/deploy-webapp.yml"
+				sshCommand remote: remote1, command: "kubectl apply -f jenkins-project/k8s-code/staging/app/."
+
+			}		    
+    	}
    }
 }
