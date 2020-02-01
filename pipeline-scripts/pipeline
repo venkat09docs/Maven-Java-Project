@@ -79,5 +79,14 @@ pipeline {
               }
           }
       }
+      
+    stage('Build Docker Image') {
+         agent {
+                  label 'BuildServer'
+         }
+         steps{
+                  sh "docker build -t gvenkat/batch21webapp ."  
+         }
+     }
    }
 }
