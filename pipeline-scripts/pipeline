@@ -5,6 +5,12 @@ def remote = [:]
          remote.user = 'centos'
          remote.password = 'Rnstech@123'
          remote.allowAnyHosts = true
+def remote1 = [:]
+    	remote1.name = 'kops'
+    	remote1.host = '172.31.2.83'
+    	remote1.user = 'centos'
+    	remote1.password = 'Rnstech@123'
+    	remote1.allowAnyHosts = true
 
 pipeline {
    agent none
