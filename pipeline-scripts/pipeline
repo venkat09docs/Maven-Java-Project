@@ -128,8 +128,21 @@ pipeline {
 				label "BuildServer"
             }
 			steps {
+                echo "Run Integration Test Cases"
+                //unstash 'Source'
                 //sh "'${mvnHome}/bin/mvn' clean verify"
             }
     }
+
+    stage ('approve') {
+			agent {
+				label "BuildServer"
+            }
+			steps {
+				//timeout(time: 7, unit: 'DAYS') {
+					input message: 'Do you want to deploy?', submitter: 'admin'
+				}
+			}
+		}
    }
 }
