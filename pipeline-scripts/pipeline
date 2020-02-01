@@ -41,7 +41,7 @@ pipeline {
           }
           steps{
                  withSonarQubeEnv('sonar-7') { // You can override the credential to be used
-                           sh 'mvn sonar:sonar'
+                           sh "'${mvnHome}/bin/mvn' sonar:sonar"
                   }
           }
       }
