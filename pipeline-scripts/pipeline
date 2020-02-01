@@ -36,9 +36,14 @@ pipeline {
           }
       }      
       stage('SonarQube analysis') {
-         withSonarQubeEnv('sonar-7') { // You can override the credential to be used
-                  sh 'mvn sonar:sonar'
-         }
+         agent {
+              label 'BuildServer'
+          }
+          steps{
+                 withSonarQubeEnv('sonar-7') { // You can override the credential to be used
+                           sh 'mvn sonar:sonar'
+                  }
+          }
       }
    }
 }
