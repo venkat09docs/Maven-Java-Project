@@ -65,5 +65,19 @@ pipeline {
               }
           }
       }
+      
+       stage('Build Code') {
+         agent {
+              label 'BuildServer'
+          }
+          steps{
+              sh "${mvnHome}/bin/mvn clean package"  
+          }
+          post{
+              success{
+                  archiveArtifacts '**/*.war'
+              }
+          }
+      }
    }
 }
