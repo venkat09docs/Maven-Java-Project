@@ -1,4 +1,11 @@
 def mvnHome
+def remote = [:]
+         remote.name = 'ansible'
+         remote.host = '172.31.30.225'
+         remote.user = 'centos'
+         remote.password = 'Rnstech@123'
+         remote.allowAnyHosts = true
+
 pipeline {
    agent none
     
@@ -15,6 +22,18 @@ pipeline {
                 mvnHome = tool name: 'maven3.6', type: 'maven'
             }      
       }   
+      }
+      
+      stage('Setup Tools'){
+         agent {
+              label 'BuildServer'
+          }
+          steps{
+          
+            sshCommand remote: remote, command: 'cd Maven-Java-Project; git pull'
+            sshCommand remote: remote, command: 'cd Maven-Java-Project; ansible-playbook -i hosts tools/sonarqube/sonar-install.yaml'
+            sshCommand remote: remote, command: 'cd Maven-Java-Project; ansible-playbook -i hosts tools/docker/docker-install.yaml'
+          }
       }
    }
 }
