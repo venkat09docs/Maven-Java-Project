@@ -41,10 +41,10 @@ pipeline {
           }
           steps{
                   echo "Sonar Scanner"
-                   //sh "${mvnHome}/bin/mvn clean package"
-                 // withSonarQubeEnv('sonar-7') { 
-                   //  sh "${mvnHome}/bin/mvn sonar:sonar"
-        
+                  //sh "${mvnHome}/bin/mvn clean package"
+                  withSonarQubeEnv('sonar-7') { 
+                     sh "${mvnHome}/bin/mvn sonar:sonar"
+                  }
                      //sh "${mvnHome}/bin/mvn sonar:sonar -Dsonar.projectKey=maven-java -Dsonar.host.url=http://server_url:9000 -Dsonar.login=token"
                   //}
                   //sh "'${mvnHome}/bin/mvn' clean sonar:sonar -Dsonar.projectKey=java -Dsonar.host.url=http://ec2-54-198-222-136.compute-1.amazonaws.com:9000 -Dsonar.login=3671a58bdbe44408418f5cd38ff2210221eb9a26"
