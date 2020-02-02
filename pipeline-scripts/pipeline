@@ -42,8 +42,8 @@ pipeline {
 
             //K8s Setup
             //sshCommand remote: remote1, command: "cd Maven-Java-Project; git pull"
-			//sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/staging/namespace/staging-ns.yml"
-			//sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/prod/namespace/prod-ns.yml"
+	    //sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/staging/namespace/staging-ns.yml"
+	    //sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/prod/namespace/prod-ns.yml"
           }
       }      
       stage('SonarQube analysis') {
@@ -110,53 +110,50 @@ pipeline {
     }
 
     stage('Deploy to Staging') {
-		     agent {
-		        label 'BuildServer'
-		    }
-			steps{
-		    	//Deploy to K8s Cluster 
-                echo "Deploy to Staging Server"
-				//sshCommand remote: remote1, command: "cd Maven-Java-Project; git pull"
-				//sshCommand remote: remote1, command: "kubectl delete -f Maven-Java-Project/k8s-code/staging/app/deploy-webapp.yml"
-				//sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/staging/app/."
-
-			}		    
+	agent {
+	      label 'BuildServer'
+	}
+	steps{
+	      //Deploy to K8s Cluster 
+              echo "Deploy to Staging Server"
+	      //sshCommand remote: remote1, command: "cd Maven-Java-Project; git pull"
+	      //sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/staging/app/."
+	}		    
     }
 
     stage ('Integration-Test') {
-			agent {
-				label "BuildServer"
-            }
-			steps {
-                echo "Run Integration Test Cases"
-                //unstash 'Source'
-                //sh "'${mvnHome}/bin/mvn' clean verify"
-            }
+	agent {
+		label "BuildServer"
+        }
+	steps {
+             echo "Run Integration Test Cases"
+             //unstash 'Source'
+            //sh "'${mvnHome}/bin/mvn' clean verify"
+        }
     }
 
     stage ('approve') {
-			agent {
-				label "BuildServer"
-            }
-			steps {
-				echo "Approval State"
+	agent {
+        	label "BuildServer"
+        }
+	steps {
+		echo "Approval State"
                 //timeout(time: 7, unit: 'DAYS') {                    
-				//	input message: 'Do you want to deploy?', submitter: 'admin'
-				//}
-			}
-		}
+			//input message: 'Do you want to deploy?', submitter: 'admin'
+		//}
+	}
+     }
 
     stage ('Prod-Deploy') {
-			agent {
-				label "BuildServer"
-            }
-			steps{
-                echo "Deploy to Production"
-				//Deploy to Prod K8s Cluster
-				//sshCommand remote: remote1, command: "cd Maven-Java-Project; git pull"
-				//sshCommand remote: remote1, command: "kubectl delete -f Maven-Java-Project/k8s-code/prod/app/deploy-webapp.yml"
-				//sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/prod/app/."
-			}
-		}
+	agent {
+		label "BuildServer"
+        }
+	steps{
+              echo "Deploy to Production"
+	      //Deploy to Prod K8s Cluster
+	      //sshCommand remote: remote1, command: "cd Maven-Java-Project; git pull"
+	      //sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/prod/app/."
+	}
+	}
    }
 }
