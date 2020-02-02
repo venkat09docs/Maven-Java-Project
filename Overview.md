@@ -41,6 +41,7 @@ Required Tools and Settings:
   - Create Project in the SonarQube Server
       - Project Name
       - Generate Token
+  - Install Sonarscanner plugin
   - Create a secret text in Jenkins credentials section
   - Add the Sonar Server Details in the Configure Section
 
