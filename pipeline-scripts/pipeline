@@ -116,8 +116,8 @@ pipeline {
 	steps{
 	      //Deploy to K8s Cluster 
               echo "Deploy to Staging Server"
-	      //sshCommand remote: remote1, command: "cd Maven-Java-Project; git pull"
-	      //sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/staging/app/."
+	      sshCommand remote: remote1, command: "cd Maven-Java-Project; git pull"
+	      sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/staging/app/."
 	}		    
     }
 
