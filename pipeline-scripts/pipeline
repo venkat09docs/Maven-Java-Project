@@ -23,7 +23,7 @@ pipeline {
          steps {
             // Get src code from a GitHub repository
             git credentialsId: 'github_un-pwd', url: 'https://github.com/venkat09docs/Maven-Java-Project.git'
-            //stash 'Source'
+            stash 'Source'
             script{
                 mvnHome = tool name: 'maven3.6', type: 'maven'
             }      
@@ -127,7 +127,7 @@ pipeline {
         }
 	steps {
              echo "Run Integration Test Cases"
-             //unstash 'Source'
+             unstash 'Source'
             sh "'${mvnHome}/bin/mvn' clean verify"
         }
     }
