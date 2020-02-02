@@ -128,7 +128,7 @@ pipeline {
 	steps {
              echo "Run Integration Test Cases"
              //unstash 'Source'
-            //sh "'${mvnHome}/bin/mvn' clean verify"
+            sh "'${mvnHome}/bin/mvn' clean verify"
         }
     }
 
@@ -138,9 +138,9 @@ pipeline {
         }
 	steps {
 		echo "Approval State"
-                //timeout(time: 7, unit: 'DAYS') {                    
-			//input message: 'Do you want to deploy?', submitter: 'admin'
-		//}
+                timeout(time: 7, unit: 'DAYS') {                    
+			input message: 'Do you want to deploy?', submitter: 'admin'
+		}
 	}
      }
 
@@ -151,8 +151,8 @@ pipeline {
 	steps{
               echo "Deploy to Production"
 	      //Deploy to Prod K8s Cluster
-	      //sshCommand remote: remote1, command: "cd Maven-Java-Project; git pull"
-	      //sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/prod/app/."
+	      sshCommand remote: remote1, command: "cd Maven-Java-Project; git pull"
+	      sshCommand remote: remote1, command: "kubectl apply -f Maven-Java-Project/k8s-code/prod/app/."
 	}
 	}
    }
