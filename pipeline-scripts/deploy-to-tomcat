@@ -11,7 +11,7 @@ pipeline {
    stages {
       stage('Check Out Code') {
           agent {
-              label 'BuildServer'
+              label 'slave'
           }
          steps {
             // Get src code from a GitHub repository
@@ -24,7 +24,7 @@ pipeline {
       }
       stage('Build'){
           agent {
-              label 'BuildServer'
+              label 'slave'
           }
         steps{
             // Run Maven on a Unix agent.
@@ -44,7 +44,7 @@ pipeline {
    
    stage('Deploy to Staging'){
       agent {
-              label 'BuildServer'
+              label 'slave'
           }
           
       steps{
