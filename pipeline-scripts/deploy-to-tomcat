@@ -1,7 +1,7 @@
 def mvnHome
 def remote = [:]
 remote.name = "Staging"
-remote.host = "172.31.7.87"
+remote.host = "172.31.5.55"
 remote.allowAnyHosts = true
 remote.user = "centos"
 remote.password = "Rnstech@123"
