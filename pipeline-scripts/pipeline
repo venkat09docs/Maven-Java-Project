@@ -78,6 +78,7 @@ pipeline {
               label 'slave'
           }
           steps{
+	      unstash 'Source'
               sh "${mvnHome}/bin/mvn clean package"  
           }
           post{
