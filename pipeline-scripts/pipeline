@@ -18,7 +18,7 @@ pipeline {
    stages {
       stage('Prepare Workspace') {
          agent {
-              label 'BuildServer'
+              label 'slave'
           }
          steps {
             // Get src code from a GitHub repository
@@ -32,7 +32,7 @@ pipeline {
       
       stage('Setup Tools'){
          agent {
-              label 'BuildServer'
+              label 'slave'
           }
           steps{
           
@@ -48,7 +48,7 @@ pipeline {
       }      
       stage('SonarQube analysis') {
          agent {
-              label 'BuildServer'
+              label 'slave'
           }
           steps{
                 echo "Sonar Scanner"
@@ -61,7 +61,7 @@ pipeline {
       
       stage('Unit Test Cases') {
          agent {
-              label 'BuildServer'
+              label 'slave'
           }
           steps{
               sh "${mvnHome}/bin/mvn clean test"  
@@ -75,7 +75,7 @@ pipeline {
       
        stage('Build Code') {
          agent {
-              label 'BuildServer'
+              label 'slave'
           }
           steps{
               sh "${mvnHome}/bin/mvn clean package"  
@@ -89,7 +89,7 @@ pipeline {
       
     stage('Build Docker Image') {
          agent {
-                  label 'BuildServer'
+                  label 'slave'
          }
          steps{
                   sh "docker build -t gvenkat/batch21webapp ."  
@@ -98,7 +98,7 @@ pipeline {
      
      stage('Publish Docker Image') {
          agent {
-                  label 'BuildServer'
+                  label 'slave'
          }
     steps{
 
@@ -111,7 +111,7 @@ pipeline {
 
     stage('Deploy to Staging') {
 	agent {
-	      label 'BuildServer'
+	      label 'slave'
 	}
 	steps{
 	      //Deploy to K8s Cluster 
@@ -123,7 +123,7 @@ pipeline {
 
     stage ('Integration-Test') {
 	agent {
-		label "BuildServer"
+		label "slave"
         }
 	steps {
              echo "Run Integration Test Cases"
@@ -134,7 +134,7 @@ pipeline {
 
     stage ('approve') {
 	agent {
-        	label "BuildServer"
+        	label "slave"
         }
 	steps {
 		echo "Approval State"
@@ -146,7 +146,7 @@ pipeline {
 
     stage ('Prod-Deploy') {
 	agent {
-		label "BuildServer"
+		label "slave"
         }
 	steps{
               echo "Deploy to Production"
