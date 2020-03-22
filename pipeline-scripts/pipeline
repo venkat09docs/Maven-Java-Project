@@ -1,13 +1,13 @@
 def mvnHome
 def remote = [:]
          remote.name = 'ansible'
-         remote.host = '172.31.30.225'
+         remote.host = '172.31.6.157'
          remote.user = 'centos'
          remote.password = 'Rnstech@123'
          remote.allowAnyHosts = true
 def remote1 = [:]
     	remote1.name = 'kops'
-    	remote1.host = '172.31.62.36'
+    	remote1.host = '172.31.0.214'
     	remote1.user = 'centos'
     	remote1.password = 'Rnstech@123'
     	remote1.allowAnyHosts = true
@@ -22,10 +22,10 @@ pipeline {
           }
          steps {
             // Get src code from a GitHub repository
-            git credentialsId: 'github_un-pwd', url: 'https://github.com/venkat09docs/Maven-Java-Project.git'
+            git credentialsId: 'git_user', url: 'https://github.com/venkat09docs/Maven-Java-Project.git'
             stash 'Source'
             script{
-                mvnHome = tool name: 'maven3.6', type: 'maven'
+                mvnHome = tool name: 'maven3', type: 'maven'
             }      
       }   
       }
@@ -37,8 +37,8 @@ pipeline {
           steps{
           
             sshCommand remote: remote, command: 'cd Maven-Java-Project; git pull'
-            //sshCommand remote: remote, command: 'cd Maven-Java-Project; ansible-playbook -i hosts tools/sonarqube/sonar-install.yaml'
-            //sshCommand remote: remote, command: 'cd Maven-Java-Project; ansible-playbook -i hosts tools/docker/docker-install.yml'
+            sshCommand remote: remote, command: 'cd Maven-Java-Project; ansible-playbook -i hosts tools/sonarqube/sonar-install.yaml'
+            sshCommand remote: remote, command: 'cd Maven-Java-Project; ansible-playbook -i hosts tools/docker/docker-install.yml'
 
             //K8s Setup
             sshCommand remote: remote1, command: "cd Maven-Java-Project; git pull"
