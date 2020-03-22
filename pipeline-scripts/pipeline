@@ -53,12 +53,12 @@ pipeline {
           steps{
                 echo "Sonar Scanner"
                   
-                //withSonarQubeEnv('sonar-7') { 
+                withSonarQubeEnv('sonar-7') { 
                    sh "${mvnHome}/bin/mvn sonar:sonar \
   -Dsonar.projectKey=test \
   -Dsonar.host.url=http://ec2-3-0-96-129.ap-southeast-1.compute.amazonaws.com:9000 \
   -Dsonar.login=217ed2355569d764fe25cbf2f113e4e7188df258"
-                //}                     
+                }                     
           }
       }
       
