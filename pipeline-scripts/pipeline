@@ -55,9 +55,9 @@ pipeline {
                   
                 withSonarQubeEnv('sonar-7') { 
                    sh "${mvnHome}/bin/mvn sonar:sonar \
-  -Dsonar.projectKey=maven-java \
+  -Dsonar.projectKey=test \
   -Dsonar.host.url=http://ec2-3-0-96-129.ap-southeast-1.compute.amazonaws.com:9000 \
-  -Dsonar.login=a6469b6735e9cd85772fc72accc32f7d89962d90"
+  -Dsonar.login=945e97d77890fe4d9e7ec27e23d4f2a6f684dea0"
                 }                     
           }
       }
