@@ -9,7 +9,7 @@ This example demonstrates:
 * Unit test using [PowerMockito](https://code.google.com/p/powermock/) to mock classes and test `System.exit()`
 * Integration tests written with [JUnit 4](http://junit.org/)
 * Integration test using [system-rules](http://www.stefan-birkner.de/system-rules/) to test `System.out`
-* Code coverage reports via [Cobertura](http://cobertura.github.io/cobertura/)
+* Code coverage reports via Soanr.
 * A Maven build that puts it all together
 
 Running the tests
@@ -17,7 +17,7 @@ Running the tests
 
 * To run the unit tests, call `mvn test`
 * To run the integration tests as well, call `mvn verify`
-* To generate (unit test) code coverage reports, call `mvn cobertura:cobertura`, and point a browser at the output in `target/site/cobertura/`
+* To generate (unit test) code coverage reports, call `mvn sonar:sonar`
 
 Conventions
 -----------
