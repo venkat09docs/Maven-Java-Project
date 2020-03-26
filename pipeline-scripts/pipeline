@@ -93,7 +93,7 @@ pipeline {
                   label 'Slave'
          }
          steps{
-                  sh "docker build -t gvenkat/batch21webapp ."  
+                  sh "docker build -t gvenkat/batch22 ."  
          }
      }
      
