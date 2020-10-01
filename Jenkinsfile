@@ -4,6 +4,12 @@ def remote = [:]
          remote.user = 'centos'
          remote.password = 'Rnstech@123'
          remote.allowAnyHosts = true
+def kops = [:]
+         remote.name = 'kops'
+         remote.host = '172.31.34.51'
+         remote.user = 'centos'
+         remote.password = 'Rnstech@123'
+         remote.allowAnyHosts = true
 pipeline {
     agent { label 'buildserver'}
 
@@ -25,6 +31,8 @@ pipeline {
                 sshCommand remote: remote, command: 'cd Maven-Java-Project; git pull'
                 sshCommand remote: remote, command: 'cd Maven-Java-Project; ansible-playbook -i hosts tools/sonarqube/sonar-install.yaml'
                 sshCommand remote: remote, command: 'cd Maven-Java-Project; ansible-playbook -i hosts tools/docker/docker-install.yml'   
+                     
+                
             }
             
         }
