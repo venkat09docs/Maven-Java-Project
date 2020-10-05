@@ -1,0 +1,32 @@
+---
+language: python
+
+python:
+  - "3.6"      # current default Python on Travis CI
+
+cache: pip
+
+services:
+  - docker
+
+env:
+  - MOLECULE_DISTRO=centos7
+  # - MOLECULE_DISTRO=ubuntu1804
+  # - MOLECULE_DISTRO=ubuntu1604
+  - MOLECULE_DISTRO=debian8
+  - MOLECULE_DISTRO=debian9
+  # - MOLECULE_DISTRO=debian10
+
+install:
+  - pip install --quiet molecule
+  - pip install --quiet 'molecule[docker]'
+
+before_script:
+  - molecule --version
+  - ansible --version
+
+script:
+  - molecule test
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
