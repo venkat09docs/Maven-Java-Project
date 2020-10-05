@@ -5,6 +5,9 @@
    become_method: sudo
    connection: ssh
    gather_facts: yes    
+   vars:
+      java_packages:
+        - java-1.8.0-openjdk
    roles:
      - geerlingguy.java
      - ansible-role-sonarqube
