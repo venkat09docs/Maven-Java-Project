@@ -1,4 +1,4 @@
-Ansible Role: SonarQube ([lrk.sonarqube](https://galaxy.ansible.com/lrk/sonarqube/))
+Ansible Role: SonarQube 
 =========
 [![Build Status](https://travis-ci.org/lrk/ansible-role-sonarqube.svg?branch=master)](https://travis-ci.org/lrk/ansible-role-sonarqube)
 [![Galaxy](https://img.shields.io/badge/galaxy-lrk.sonarqube-blue.svg)](https://galaxy.ansible.com/lrk/sonarqube)
