@@ -6,4 +6,5 @@
    connection: ssh
    gather_facts: yes    
    roles:
+     - geerlingguy.java
      - ansible-role-sonarqube
