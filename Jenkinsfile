@@ -50,5 +50,17 @@ pipeline {
                 }                     
           }
       }
+	    
+      stage('Unit Test Cases') {
+         
+          steps{
+              sh "mvn clean test"  
+          }
+          post{
+              success{
+                  junit 'target/surefire-reports/*.xml'
+              }
+          }
+      }
     }
 }
