@@ -83,5 +83,16 @@ pipeline {
                   sh "docker build -t gvenkat/webapp1 ."  
          }
      }
+	    
+     stage('Publish Docker Image') {
+         
+        steps{
+
+    	      withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
+    		    sh "docker login -u ${dockerUser} -p ${dockerPassword}"
+	      }
+        	sh "docker push gvenkat/webapp1"
+         }
+    }
     }
 }
