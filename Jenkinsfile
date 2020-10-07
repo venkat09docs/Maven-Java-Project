@@ -132,7 +132,7 @@ pipeline {
               echo "Deploy to Production"
 	      //Deploy to Prod K8s Cluster
 	      sshCommand remote: kops, command: "cd Maven-Java-Project; git pull"
-	      sshCommand remote: kops, command: "kubectl apply -f Maven-Java-Project/k8s-code/prod/app/deploy-webapp.yml"
+	      sshCommand remote: kops, command: "kubectl delete -f Maven-Java-Project/k8s-code/prod/app/deploy-webapp.yml"
 	      sshCommand remote: kops, command: "kubectl apply -f Maven-Java-Project/k8s-code/prod/app/."
 	}
 	}
