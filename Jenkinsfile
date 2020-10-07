@@ -127,9 +127,7 @@ pipeline {
      }
 	    
      stage ('Prod-Deploy') {
-	agent {
-		label "Slave"
-        }
+	
 	steps{
               echo "Deploy to Production"
 	      //Deploy to Prod K8s Cluster
