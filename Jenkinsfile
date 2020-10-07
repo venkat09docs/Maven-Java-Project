@@ -68,7 +68,7 @@ pipeline {
         
           steps{
 	      unstash 'Source'
-              sh "${mvnHome}/bin/mvn clean package"  
+              sh "mvn clean package"  
           }
           post{
               success{
