@@ -1,3 +1,9 @@
+def deploy = [:]
+  remote.name = 'deploy'
+  remote.host = '172.31.27.155'
+  remote.user = 'centos'
+  remote.password = 'Rnstech@123'
+  remote.allowAnyHosts = true
 pipeline {
     agent {
             label "build"
@@ -55,6 +61,18 @@ pipeline {
                 }
 
             }
+        }
+
+        stage('Deployment') {
+            steps {
+                sh "mv target/*.war webapp.war"
+                // stop the server
+                sshCommand remote: deploy, command: 'sh /opt/webserver/bin/shutdown.sh'
+                
+                // deploy the application
+                sshPut remote: remote, from: 'abc.sh', into: '.'
+                // start the server
+            }            
         }
     }
 }
