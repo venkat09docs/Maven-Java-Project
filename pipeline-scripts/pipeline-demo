@@ -70,7 +70,7 @@ pipeline {
                 sshCommand remote: deploy, command: 'sh /opt/webserver/bin/shutdown.sh'
                 
                 // deploy the application
-                sshPut remote: deploy, from: 'target/*.war', into: 'opt/webserver/webapps'
+                sshPut remote: deploy, from: 'target/*.war', into: '/opt/webserver/webapps'
 
                 // start the server
                 sshCommand remote: deploy, command: 'sh /opt/webserver/bin/startup.sh'
