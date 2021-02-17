@@ -43,5 +43,18 @@ pipeline {
 
             }
         }
+
+        stage('Packaging') {
+            steps {
+                // Packaging the App
+                sh "mvn clean package"
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: '**/*.war', followSymlinks: false
+                }
+
+            }
+        }
     }
 }
