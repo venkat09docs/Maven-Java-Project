@@ -1,9 +1,9 @@
 def deploy = [:]
-  remote.name = 'deploy'
-  remote.host = '172.31.27.155'
-  remote.user = 'centos'
-  remote.password = 'Rnstech@123'
-  remote.allowAnyHosts = true
+  deploy.name = 'deploy'
+  deploy.host = '172.31.27.155'
+  deploy.user = 'centos'
+  deploy.password = 'Rnstech@123'
+  deploy.allowAnyHosts = true
 pipeline {
     agent {
             label "build"
