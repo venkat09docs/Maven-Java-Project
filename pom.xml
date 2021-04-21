@@ -7,7 +7,7 @@
 
   <groupId>com.example</groupId>
   <artifactId>java-maven</artifactId>
-  <version>2.0-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <properties>
@@ -131,12 +131,12 @@
     <snapshotRepository>
       <id>deployment</id>
       <name>my snapshot repository</name>
-      <url>http://54.251.188.233:8080/nexus/content/repositories/snapshots/</url>
+      <url>http://52.16.109.21:8080/nexus/content/repositories/snapshots/</url>
     </snapshotRepository>
     <repository>
       <id>deployment</id>
       <name>my repository</name>
-      <url>http://54.251.188.233:8080/nexus/content/repositories/releases/</url>
+      <url>http://52.16.109.21/:8080/nexus/content/repositories/releases/</url>
     </repository>
   </distributionManagement>
 </project>
