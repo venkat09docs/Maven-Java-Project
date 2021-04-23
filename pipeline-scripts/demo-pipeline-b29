@@ -1,3 +1,10 @@
+def remote = [:]
+  remote.name = 'deployment'
+  remote.host = '172.31.19.196'
+  remote.user = 'centos'
+  remote.password = 'Rnstech@123'
+  remote.allowAnyHosts = true
+  
 node('build-server') {
     def mvnHome
     
@@ -25,5 +32,11 @@ node('build-server') {
     stage('Results') {
         junit 'target/surefire-reports/*.xml'
         archiveArtifacts artifacts: '**/*.war', followSymlinks: false
+    }
+    stage('Deploy-to-Staging'){
+         sh "mv target/*.war target/webapp.war"
+         sshCommand remote: remote, command: "sh /opt/webserver/bin/shutdown.sh"
+         sshPut remote: remote, from: 'target/webapp.war', into: '/opt/webserver/webapps/'
+         sshCommand remote: remote, command: "sh /opt/webserver/bin/startup.sh"
     }
 }
