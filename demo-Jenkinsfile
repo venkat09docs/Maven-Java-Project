@@ -20,7 +20,7 @@ pipeline {
                 label 'BuildServer'
             }
             steps {
-                 sh '${mvnHome}/bin/mvn cobertura:cobertura'
+                 sh "'${mvnHome}/bin/mvn' cobertura:cobertura"
             }
         }    
     }
