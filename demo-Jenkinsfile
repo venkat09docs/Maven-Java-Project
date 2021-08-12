@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Check Out Code') {
             agent {
-                lable 'BuildServer'
+                label 'BuildServer'
             }
             steps {
                 git credentialsId: 'fb059305-1b4b-41a4-9b26-c71f1b6606c0', url: 'https://github.com/venkat09docs/Maven-Java-Project.git' 
