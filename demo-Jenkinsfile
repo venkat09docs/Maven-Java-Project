@@ -1,17 +1,15 @@
 def str = 'Pipeline'
 pipeline {
-    agent any
+    agent none
 
     stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello World'
+        stage('Check Out Code') {
+            agent {
+                lable 'BuildServer'
             }
-        }
-        stage('Welcome') {
             steps {
-                echo "Welcome to ${str} Script"
+                git credentialsId: 'fb059305-1b4b-41a4-9b26-c71f1b6606c0', url: 'https://github.com/venkat09docs/Maven-Java-Project.git' 
             }
-        }
+        }        
     }
 }
