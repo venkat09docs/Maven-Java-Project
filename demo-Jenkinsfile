@@ -1,4 +1,10 @@
 def mvnHome
+def remote = [:]
+  remote.name = 'stagingserver'
+  remote.host = '172.31.4.43'
+  remote.user = 'centos'
+  remote.password = 'Rnstech@123'
+  remote.allowAnyHosts = true
 pipeline {
     agent none
 
@@ -49,10 +55,16 @@ pipeline {
                 label 'BuildServer'
             }
             steps {
+                 sh "mv target/*.war target/webapp.war"
+                 
                  # Stop the staging Server        TOMCAT_HOME/bin/shutdown.sh
+                 sshCommand remote: remote, command: "sh /home/centos/stagingserver/bin/shutdown.sh"
+                 
                  # Deploy the Application         cp .war to webapps
+                 sshPut remote: remote, from: 'target/webapp.war' into: '/home/centos/stagingserver/webapps/'
+                 
                  # Start the staging Server       TOMCAT_HOME/bin/startup.sh
-                 # deploy adapters: [tomcat9(credentialsId: 'aaa61253-1acb-4e3e-bf8b-922f8a9a79ec', path: '', url: 'http://13.213.32.134:8080/')], contextPath: 'webapp', war: 'target/*.war'
+                 sshCommand remote: remote, command: "sh /home/centos/stagingserver/bin/startup.sh"
             }            
         }
     }
