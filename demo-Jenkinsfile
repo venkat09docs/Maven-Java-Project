@@ -49,13 +49,8 @@ pipeline {
                 label 'BuildServer'
             }
             steps {
-                 
-            }
-            post {
-                success {
-                     
-                }
-            }
+                 deploy adapters: [tomcat9(credentialsId: 'aaa61253-1acb-4e3e-bf8b-922f8a9a79ec', path: '', url: 'http://13.213.32.134:8080/')], contextPath: 'webapp', war: 'target/*.war'
+            }            
         }
     }
 }
