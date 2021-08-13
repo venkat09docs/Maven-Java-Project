@@ -49,7 +49,10 @@ pipeline {
                 label 'BuildServer'
             }
             steps {
-                 deploy adapters: [tomcat9(credentialsId: 'aaa61253-1acb-4e3e-bf8b-922f8a9a79ec', path: '', url: 'http://13.213.32.134:8080/')], contextPath: 'webapp', war: 'target/*.war'
+                 # Stop the staging Server        TOMCAT_HOME/bin/shutdown.sh
+                 # Deploy the Application         cp .war to webapps
+                 # Start the staging Server       TOMCAT_HOME/bin/startup.sh
+                 # deploy adapters: [tomcat9(credentialsId: 'aaa61253-1acb-4e3e-bf8b-922f8a9a79ec', path: '', url: 'http://13.213.32.134:8080/')], contextPath: 'webapp', war: 'target/*.war'
             }            
         }
     }
