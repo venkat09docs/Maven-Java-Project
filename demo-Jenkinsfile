@@ -61,11 +61,11 @@ pipeline {
                  sshCommand remote: remote, command: "sh /home/centos/stagingserver/bin/shutdown.sh"
                  
                  // Deploy the Application         cp .war to webapps
-                 sshPut remote: remote, from: 'target/webapp.war' into: '/home/centos/stagingserver/webapps/'
+                 sshPut remote: remote, from: 'target/webapp.war', into: '/home/centos/stagingserver/webapps/'
                  
                  // Start the staging Server       TOMCAT_HOME/bin/startup.sh
                  sshCommand remote: remote, command: "sh /home/centos/stagingserver/bin/startup.sh"
             }            
-        
+        }
     }
 }
