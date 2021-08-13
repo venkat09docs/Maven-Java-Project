@@ -43,5 +43,19 @@ pipeline {
                 }
             }
         }
+        
+        stage('Deploy to Staging') {
+            agent {
+                label 'BuildServer'
+            }
+            steps {
+                 
+            }
+            post {
+                success {
+                     
+                }
+            }
+        }
     }
 }
