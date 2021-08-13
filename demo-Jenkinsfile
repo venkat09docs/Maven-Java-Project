@@ -66,6 +66,6 @@ pipeline {
                  // Start the staging Server       TOMCAT_HOME/bin/startup.sh
                  sshCommand remote: remote, command: "sh /home/centos/stagingserver/bin/startup.sh"
             }            
-        }
+        
     }
 }
