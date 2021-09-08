@@ -20,7 +20,7 @@ public class JenkinsDemo
     @Before
     public void setUp()
     {
-        ChromeOptions chromeOptions= new ChromeOptions();
+        ChromeOptions chromeOptions= new ChromeOptions()
         chromeOptions.setBinary("/bin/chromedriver");
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--headless");
