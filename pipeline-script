@@ -1,4 +1,4 @@
-def greet = "Welcome to RNS"
+def greet = "Welcome to Rnstech"
 
 pipeline {
     agent any
