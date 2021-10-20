@@ -1,5 +1,13 @@
 node('BuildServer') {
     def mvnHome
+    
+    def remote = [:]
+    remote.name = 'appserver'
+    remote.host = '172.31.28.7'
+    remote.user = 'centos'
+    remote.password = 'Rnstech@123'
+    remote.allowAnyHosts = true
+  
     stage('Preparation') {         
 
             git credentialsId: '198f4363-36e8-454c-b449-61cf4d4f89fa', url: 'https://github.com/venkat09docs/Maven-Java-Project.git'
@@ -20,6 +28,10 @@ node('BuildServer') {
         archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
     }
     stage('Deploy-App') {
-        deploy adapters: [tomcat9(credentialsId: '5040c630-206c-43f4-a0b6-c4c41104dde1', path: '', url: 'http://52.221.186.240:8080/')], contextPath: 'webapp', war: 'target/*.war'
+        // deploy adapters: [tomcat9(credentialsId: '5040c630-206c-43f4-a0b6-c4c41104dde1', path: '', url: 'http://52.221.186.240:8080/')], contextPath: 'webapp', war: 'target/*.war'
+        sh "mv target/*.war target/webapp.war"
+        sshCommand remote: remote, command: "sh /opt/nexusserver/bin/shutdown.sh"
+        sshPut remote: remote, from: 'target/webapp.war', into: '/opt/nexusserver/webapps'
+        sshCommand remote: remote, command: "sh /opt/nexusserver/bin/startup.sh"
     }
 }
