@@ -1,17 +1,22 @@
-def greet = "Welcome to Rnstech"
+node('BuildServer') {
+    def mvnHome
+    stage('Preparation') {         
 
-pipeline {
-    agent any
+            git credentialsId: '198f4363-36e8-454c-b449-61cf4d4f89fa', url: 'https://github.com/venkat09docs/Maven-Java-Project.git'
 
-    stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello World'
-            }
+            mvnHome = tool 'Maven3'
+
+    }
+    stage('Build') {
+        // Run the maven build
+        withEnv(["MVN_HOME=$mvnHome"]) {
+            
+            sh '"$MVN_HOME/bin/mvn" clean package'
+            
         }
-        stage('Welcome') {
-            steps {
-                echo "${greet}"            }
-        }
+    }
+    stage('Results') {
+        junit '**/target/surefire-reports/*.xml'
+        archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
     }
 }
