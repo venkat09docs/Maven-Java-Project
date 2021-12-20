@@ -1,0 +1,30 @@
+pipeline {
+    agent {
+        label 'BuildServer'
+    }
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "Maven3"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                
+                git 'https://github.com/venkat09docs/Maven-Java-Project.git'
+
+                
+                sh "mvn clean package"
+            }
+
+            post {
+               
+                success {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.war'
+                }
+            }
+        }
+    }
+}
