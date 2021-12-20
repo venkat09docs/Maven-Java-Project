@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 
-                git 'https://github.com/venkat09docs/Maven-Java-Project.git'
+                git credentialsId: 'github_credentials', url: 'https://github.com/venkat09docs/Maven-Java-Project.git'
 
                 
                 sh "mvn clean package"
@@ -25,6 +25,11 @@ pipeline {
                     archiveArtifacts 'target/*.war'
                 }
             }
+        }
+        stage('Deployment') {
+            steps {                
+                deploy adapters: [tomcat9(credentialsId: '46946cb4-18c1-4c49-88d3-513efbad788d', path: '', url: 'http://13.127.46.213:8080/')], contextPath: 'webapp', war: 'target/*.war'
+            }            
         }
     }
 }
