@@ -48,7 +48,7 @@ public class HelloAppTest {
         Hello hi = mock(Hello.class);
         doThrow(new IllegalArgumentException("Nope.")).when(hi).setTimes(5);
         // Sneakily insert our fake Hello class when it is created.
-        whenNew(Hello.class).withNoArguments().thenReturn(h);
+        whenNew(Hello.class).withNoArguments().thenReturn(hi);
 
         // We know this will raise the expected exception, because we mocked Hello.
         String[] args = {"5"};
@@ -72,6 +72,6 @@ public class HelloAppTest {
         // method, but for purposes of full code coverage it is included. In general,
         // it is easier to aim for full code coverage and be done with it, than to remember why class X is stuck at
         // 95% code coverage.
-        new HelloApp();
+        //new HelloApp();
     }
 }
