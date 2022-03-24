@@ -1,0 +1,16 @@
+def hello = "Welcome to Pipeline"
+pipeline {
+    
+    agent {
+        label 'BuildServer'
+    }
+
+    stages {
+        stage('Hello') {
+            
+            steps {
+                echo "${hello}"
+            }
+        }
+    }
+}
