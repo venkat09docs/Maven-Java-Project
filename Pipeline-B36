@@ -21,6 +21,20 @@ pipeline {
                 sh "mvn clean compile"
             }
         }
+        
+        stage('Pre Deployment Testing'){
+            steps{
+                // Run Maven on a Unix agent.
+                sh "mvn clean test"
+            }
+            post {
+                // If Maven was able to run the tests, even if some of the test
+                // failed, record the test results .
+                success {
+                    junit '**/target/surefire-reports/*.xml'                    
+                }
+            }
+        }
     }
 
    
