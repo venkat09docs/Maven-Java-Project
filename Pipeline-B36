@@ -35,6 +35,18 @@ pipeline {
                 }
             }
         }
+        
+        stage('Packaging'){
+            steps{
+                // Run Maven on a Unix agent.
+                sh "mvn clean package"
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: '**/*.war', followSymlinks: false                    
+                }
+            }
+        }
     }
 
    
