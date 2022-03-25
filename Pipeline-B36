@@ -1,16 +1,20 @@
-def hello = "Welcome to Pipeline"
 pipeline {
-    
-    agent {
+    agent{
         label 'BuildServer'
     }
-
-    stages {
-        stage('Hello') {
-            
-            steps {
-                echo "${hello}"
+    
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "maven3"
+    }
+    
+    stages{
+        stage('Pull Source Code'){
+            steps{
+                git credentialsId: 'Git_Credentials', url: 'https://github.com/venkat09docs/Maven-Java-Project.git'
             }
         }
     }
+
+   
 }
