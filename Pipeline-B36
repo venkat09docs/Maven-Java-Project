@@ -14,6 +14,12 @@ pipeline {
                 git credentialsId: 'Git_Credentials', url: 'https://github.com/venkat09docs/Maven-Java-Project.git'
             }
         }
+        
+        stage('Compile the Source Code'){
+            steps{
+                mvn clean compile
+            }
+        }
     }
 
    
