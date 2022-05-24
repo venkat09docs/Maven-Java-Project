@@ -58,5 +58,13 @@ pipeline {
                 deploy adapters: [tomcat9(credentialsId: 'appserver', path: '', url: 'http://13.250.64.239:8080/')], contextPath: 'webapp', war: '**/*.war'
             }                      
         }
+        stage('Integration Testing'){
+            agent{                
+                label 'buildserver'
+            }
+            steps{
+                sh 'mvn clean verify' 
+            }                      
+        }
     }    
 }
