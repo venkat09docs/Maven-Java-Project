@@ -35,18 +35,26 @@ pipeline {
       stage("Packaging-Application"){
         steps{
         	 echo 'Packaging-Application'
+           sh "mvn clean package"
+        }
+        post{
+          success{
+              archiveArtifacts artifacts: '**/*.war', followSymlinks: false
+          }
         }
       }
 
       stage("Deploy-to-Server"){
         steps{
           echo 'Deploy-to-Server'
+          deploy adapters: [tomcat9(credentialsId: 'staging-server', path: '', url: 'http://54.217.15.144:9000/')], contextPath: 'webapp', war: 'target/*.war'
         }
       }
 
       stage("Post-Deployment-Testing"){
         steps{
 	         echo 'Post-Deployment-Testing'
+           sh "mvn clean verify"
         }
       }
 
