@@ -1,0 +1,40 @@
+pipeline {
+
+   agent {
+      label 'buildserver'
+   }
+
+   stages {
+
+      stage("Compile-Src-Code"){
+        steps{
+	        echo 'Compile Src Code'
+        }
+      }
+
+      stage("Pre-Deployment-Testing"){
+          steps{
+            echo 'Pre-Deployment-Testing'
+          }
+      }
+
+      stage("Packaging-Application"){
+        steps{
+        	 echo 'Packaging-Application'
+        }
+      }
+
+      stage("Deploy-to-Server"){
+        steps{
+          echo 'Deploy-to-Server'
+        }
+      }
+
+      stage("Post-Deployment-Testing"){
+        steps{
+	         echo 'Post-Deployment-Testing'
+        }
+      }
+
+  }// end of Stages
+} // end of Pipeline
