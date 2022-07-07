@@ -4,11 +4,18 @@ pipeline {
       label 'buildserver'
    }
 
+   tools {
+        maven "maven3"
+   }
+
    stages {
 
       stage("Compile-Src-Code"){
         steps{
 	        echo 'Compile Src Code'
+          git credentialsId: 'GitHub-Credentials', url: 'https://github.com/venkat09docs/Maven-Java-Project.git'
+
+          sh "mvn clean compile"
         }
       }
 
