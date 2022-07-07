@@ -22,6 +22,13 @@ pipeline {
       stage("Pre-Deployment-Testing"){
           steps{
             echo 'Pre-Deployment-Testing'
+            sh "mvn clean test"
+          }
+          post{
+            success{
+              junit '**/target/surefire-reports/*.xml'
+            }
+
           }
       }
 
