@@ -48,7 +48,7 @@
         </exclusion>
       </exclusions>
     </dependency>
-           
+
     <dependency>
         <groupId>org.seleniumhq.selenium</groupId>
         <artifactId>selenium-java</artifactId>
@@ -131,12 +131,12 @@
     <snapshotRepository>
       <id>deployment</id>
       <name>my snapshot repository</name>
-      <url>http://34.255.2.204:8081/repository/maven-snapshots/</url>
+      <url>http://3.8.235.111:8081/repository/maven-snapshots/</url>
     </snapshotRepository>
     <repository>
       <id>deployment</id>
       <name>my repository</name>
-      <url>http://34.255.2.204:8081/repository/maven-releases/</url>
+      <url>http://3.8.235.111:8081/repository/maven-releases/</url>
     </repository>
   </distributionManagement>
 </project>
