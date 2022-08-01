@@ -76,5 +76,23 @@ pipeline {
                 }
             }
         }
+
+        stage('Deployment') {
+
+            steps {
+                echo 'Deploying Artifact to the Staging Server'
+                deploy adapters: [tomcat9(credentialsId: 'appserver_credentials', path: '', url: 'http://18.170.92.88:8090/')], contextPath: 'webapp', onFailure: false, war: 'target/*.war'
+            }
+            post{
+                changed{
+                    emailext(
+                        to: 'venkat09docs@gmail.com',
+                        subject: "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                        body: "details",
+                        recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                    )
+                }
+            }
+        }
     }
 }
