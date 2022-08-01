@@ -33,5 +33,26 @@ pipeline {
                 }
             }
         }
+
+        stage('Unit-Test-Cases') {
+
+            steps {
+                echo 'Running Unit Test Cases'
+                sh "mvn clean test"
+            }
+            post{
+                changed{
+                    emailext(
+                        to: 'venkat09docs@gmail.com',
+                        subject: "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                        body: "details",
+                        recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                    )
+                }
+                success{
+                    junit '**/target/surefire-reports/*.xml'
+                }
+            }
+        }
     }
 }
