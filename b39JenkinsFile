@@ -1,0 +1,37 @@
+pipeline {
+    agent {
+        label "buildserver"
+    }
+
+    tools{
+        maven 'maven3.8'
+    }
+
+    stages {
+        stage('Preparation') {
+
+            steps {
+                echo "Integrating with Git HubRepo"
+                git credentialsId: 'github_credentials', url: 'https://github.com/venkat09docs/Maven-Java-Project.git'
+            }
+        }
+
+        stage('Compile') {
+
+            steps {
+                echo 'Compiling Source Code'
+                sh "mvn clean compile"
+            }
+            post{
+                changed{
+                    emailext(
+                        to: 'venkat09docs@gmail.com',
+                        subject: "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                        body: "details",
+                        recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                    )
+                }
+            }
+        }
+    }
+}
