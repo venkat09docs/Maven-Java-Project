@@ -94,5 +94,23 @@ pipeline {
                 }
             }
         }
+
+        stage('Integration Testing') {
+
+            steps {
+                echo 'Running IT Test Cases'
+                sh "mvn clean verify -DskipTests"
+            }
+            post{
+                changed{
+                    emailext(
+                        to: 'venkat09docs@gmail.com',
+                        subject: "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                        body: "details",
+                        recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                    )
+                }
+            }
+        }
     }
 }
